@@ -1,7 +1,8 @@
-//Project 22- Delvering health kits to people through a helicopter
+//Project 23- Delvering health kits to people through a helicopter through packages in drop zone
 
 var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
 var packageBody, ground;
+var box1, box2,box3;
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -39,12 +40,16 @@ function setup() {
 	World.add(world, packageBody);
 	  
     //Create a Ground
-	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
+	ground = Bodies.rectangle(width/2, 649, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 	 
    //running the engine
 	Engine.run(engine);
-
+	
+	//making boxes from box class to create drop zone
+	box1 = new Box(290,615,20,100);
+	box2 = new Box(510,615,20,100);
+	box3 = new Box(400,650,200,20);
 }
 
 
@@ -54,6 +59,11 @@ function draw() {
 
   //Call the function to handle key press down
   keyPressed();
+  
+ //displaying the boxes 
+  box1.display();
+  box2.display();
+  box3.display();
   
   drawSprites();
   
@@ -66,8 +76,6 @@ function keyPressed() {
 		Matter.Body.setStatic(packageBody, false)
 		
 		packageSprite.x= packageBody.position.x 
-	 	packageSprite.y= packageBody.position.y   
- 
- 	}
-
+	 	packageSprite.y= packageBody.position.y -20;  
+  	}
 }
